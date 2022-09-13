@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+from utils.timestamp import TimeStampedModel
+
 
 class UserManager(BaseUserManager):
     """
@@ -43,12 +45,16 @@ class UserManager(BaseUserManager):
         return user
 
 
-class Account(AbstractBaseUser):
+class User(AbstractBaseUser, TimeStampedModel):
+    """
+    관리할 유저 정보와 유저/관리자 권한을 구분하는 모델
+    """
+
     name = models.CharField(verbose_name="이름", max_length=10)
-    username = models.CharField(verbose_name="아이디", max_length=20)
+    username = models.CharField(verbose_name="아이디", max_length=20, unique=True)
     password = models.CharField(verbose_name="비밀번호", max_length=128)
     sex = models.BooleanField(verbose_name="성별", default=True)
-    mobile = models.CharField(verbose_name="핸대폰 번호", max_length=15)
+    mobile = models.CharField(verbose_name="핸대폰 번호", max_length=15, unique=True)
     address = models.CharField(verbose_name="주소", max_length=100)
 
     # state
