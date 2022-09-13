@@ -157,6 +157,10 @@ CORS_ALLOW_HEADERS = (
     "x-requested-with",
 )
 
+# custom_model
+
+AUTH_USER_MODEL = "accounts.User"
+
 # rest_framework_simplejwt
 
 REST_FRAMEWORK = {
