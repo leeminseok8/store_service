@@ -54,7 +54,7 @@ class User(AbstractBaseUser, TimeStampedModel):
     username = models.CharField(verbose_name="아이디", max_length=20, unique=True)
     password = models.CharField(verbose_name="비밀번호", max_length=128)
     sex = models.BooleanField(verbose_name="성별", default=True)
-    mobile = models.CharField(verbose_name="핸대폰 번호", max_length=15, unique=True)
+    mobile = models.CharField(verbose_name="핸드폰 번호", max_length=15, unique=True)
     address = models.CharField(verbose_name="주소", max_length=100)
 
     # state

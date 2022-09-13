@@ -32,6 +32,14 @@ class SignInSerializer(TokenObtainPairSerializer):
 
 
 class SignUpSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(min_length=8)
+
+    def create(self, validated_data):
+        user = super().create(validated_data)
+        user.set_password(validated_data.get("password"))
+        user.save()
+        return user
+
     class Meta:
-        models = User
+        model = User
         fields = ["id", "username", "password", "mobile", "address"]
