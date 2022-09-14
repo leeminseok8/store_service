@@ -1,16 +1,24 @@
 from rest_framework import serializers
 
 from .models import Product, Thumbnail
-from accounts.models import User
 
 
 class ThumbnailSerializer(serializers.ModelSerializer):
+    """
+    썸네일 이미지 생성 시리얼라이저
+    유저 테이블에 FK
+    """
+
     class Meta:
         model = Thumbnail
         fields = ["image"]
 
 
 class ProductPostSerializer(serializers.ModelSerializer):
+    """
+    상품 생성 시리얼라이저
+    """
+
     thumbnail = ThumbnailSerializer()
 
     def create(self, validated_data):
@@ -31,6 +39,38 @@ class ProductPostSerializer(serializers.ModelSerializer):
 
 
 class ProductListSerializer(serializers.ModelSerializer):
+    """
+    상품 리스트 조회 생성 시리얼라이저
+    """
+
     class Meta:
         model = Product
-        fields = "__all__"
+        fields = ["id", "title", "price"]
+
+
+class ProductDetailSerializer(serializers.ModelSerializer):
+    """
+    상품 조회 시리얼라이저
+    """
+
+    class Meta:
+        model = Product
+        exclude = ["created_at", "updated_at"]
+
+
+class ProductUpdateSerializer(serializers.ModelSerializer):
+    """
+    상품 수정 시리얼라이저
+    """
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get("title", instance.title)
+        instance.content = validated_data.get("content", instance.content)
+        instance.price = validated_data.get("price", instance.price)
+        instance.origin = validated_data.get("origin", instance.origin)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Product
+        fields = ["title", "content", "price", "origin"]

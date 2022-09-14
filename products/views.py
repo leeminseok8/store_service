@@ -1,9 +1,14 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from .models import Product
-from .seralizers import ProductPostSerializer, ProductListSerializer
+from .seralizers import (
+    ProductPostSerializer,
+    ProductListSerializer,
+    ProductDetailSerializer,
+    ProductUpdateSerializer,
+)
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -29,8 +34,28 @@ class ProductPostView(ListCreateAPIView):
     def get(self, request):
         try:
             product = Product.objects.all()
+            print(product)
             serializer = ProductListSerializer(product, many=True)
+            print(serializer)
 
             return Response(serializer.data, status=status.HTTP_200_OK)
         except:
             return Response({"message": "불러올 수 없습니다."})
+
+
+class ProductDetailView(RetrieveUpdateDestroyAPIView):
+    """
+    상풍 조회, 수정, 삭제를 위한 뷰
+    """
+
+    permission_classes = [IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        queryset = Product.objects.filter(pk=self.kwargs["pk"])
+        return queryset
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return ProductDetailSerializer
+        elif self.request.method == "PATCH":
+            return ProductUpdateSerializer
