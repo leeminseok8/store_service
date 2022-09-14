@@ -1,5 +1,5 @@
-# from django.urls import path
+from django.urls import path
 
-# urlpattern = [
-#     # path("", )
-# ]
+from .views import ProductPostView
+
+urlpatterns = [path("", ProductPostView.as_view())]
