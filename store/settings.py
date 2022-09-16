@@ -45,11 +45,14 @@ INSTALLED_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
+    "drf_yasg",
 ]
 
 LOCAL_APPS = [
     "accounts",
     "products",
+    "orders",
+    # "payments",
 ]
 
 INSTALLED_APPS += THIRD_PARTY_APPS + LOCAL_APPS
