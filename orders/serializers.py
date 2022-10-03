@@ -6,21 +6,36 @@ from .models import Order
 class OrderCreateSerializer(serializers.ModelSerializer):
     """
     주문 등록 시리얼라이저
-    현재 POST로 받아오고 있지만, Product에서 GET으로
-    다른 컬럼을 가져와서 자동으로 등록 예정
+    등록 시 결제 대기창으로 이동
     """
 
     def create(self, validated_data):
-        # total_prices = self.validated_data.pop("total_price")
-        # final_price = total_prices * self.validated_data.get("quantity")
-        # validated_data["total_price"] = final_price
         order = Order.objects.create(**validated_data)
         order.save()
         return order
 
     class Meta:
         model = Order
-        fields = "__all__"
+        fields = ["id", "total_price", "quantity", "order_number", "product", "user"]
+
+
+class OrderListSerializer(serializers.ModelSerializer):
+    """
+    주문 리스트 조회 시리얼라이저
+    """
+
+    class Meta:
+        model = Order
+        fields = [
+            "id",
+            "user",
+            "product",
+            "total_price",
+            "quantity",
+            "order_number",
+            "created_at",
+            "updated_at",
+        ]
 
 
 class OrderDetailSerializer(serializers.ModelSerializer):
@@ -41,12 +56,9 @@ class OrderUpdateSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.quantity = validated_data.get("quantity", instance.quantity)
         instance.total_price = validated_data.get("total_price", instance.total_price)
-        instance.delivery_fee = validated_data.get(
-            "delivery_fee", instance.delivery_fee
-        )
         instance.save()
         return instance
 
     class Meta:
         model = Order
-        fields = ["quantity", "total_price", "delivery_fee"]
+        fields = ["id", "quantity", "total_price"]

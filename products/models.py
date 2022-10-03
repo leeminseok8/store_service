@@ -7,6 +7,7 @@ class Product(TimeStampedModel):
     title = models.CharField(max_length=50)
     content = models.TextField()
     price = models.IntegerField()
+    delivery_fee = models.IntegerField()
     origin = models.CharField(max_length=100)
 
     class Meta:

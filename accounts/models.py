@@ -59,7 +59,7 @@ class User(AbstractBaseUser, TimeStampedModel):
 
     # state
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_seller = models.BooleanField(default=False)
 
     objects = UserManager()
 
