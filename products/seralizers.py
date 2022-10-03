@@ -35,7 +35,15 @@ class ProductPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["id", "title", "content", "price", "origin", "thumbnail"]
+        fields = [
+            "id",
+            "title",
+            "content",
+            "price",
+            "delivery_fee",
+            "origin",
+            "thumbnail",
+        ]
 
 
 class ProductListSerializer(serializers.ModelSerializer):
@@ -67,10 +75,11 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
         instance.title = validated_data.get("title", instance.title)
         instance.content = validated_data.get("content", instance.content)
         instance.price = validated_data.get("price", instance.price)
+        instance.delivery_fee = validated_data.get("delivery_fee", instance.price)
         instance.origin = validated_data.get("origin", instance.origin)
         instance.save()
         return instance
 
     class Meta:
         model = Product
-        fields = ["title", "content", "price", "origin"]
+        fields = ["title", "content", "price", "delivery_fee", "origin"]

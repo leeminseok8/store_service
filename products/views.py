@@ -34,9 +34,7 @@ class ProductPostView(ListCreateAPIView):
     def get(self, request):
         try:
             product = Product.objects.all()
-            print(product)
             serializer = ProductListSerializer(product, many=True)
-            print(serializer)
 
             return Response(serializer.data, status=status.HTTP_200_OK)
         except:
