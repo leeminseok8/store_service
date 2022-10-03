@@ -4,10 +4,10 @@
 ---
 
 ## 목차
-1. [사용 기술 스택](##-사용-기술-스택)
-2. [MVP Service](##-MVP-Service)
-3. [ERD](##-ERD)
-4. [API 명세서](##-API-명세서)
+1. [사용 기술 스택](#사용-기술-스택)
+2. [MVP Service](#MVP-Service)
+3. [ERD](#ERD)
+4. [API 명세서](#API-명세서)
 
 <br>
 

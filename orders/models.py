@@ -9,8 +9,8 @@ from accounts.models import User
 
 class Order(TimeStampedModel):
     quantity = models.PositiveIntegerField()
-    delivery_fee = models.IntegerField()
     total_price = models.IntegerField()
+    order_number = models.CharField(max_length=128, null=True, unique=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

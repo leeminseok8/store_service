@@ -15,7 +15,7 @@ class IsOwnerOrReadOnly(BasePermission):
         if request.method in SAFE_METHODS:
             return True
         if user.is_authenticated:
-            if user.is_staff:
+            if user.is_seller:
                 return True
             else:
                 return False
