@@ -52,7 +52,7 @@ LOCAL_APPS = [
     "accounts",
     "products",
     "orders",
-    # "payments",
+    "payments",
 ]
 
 INSTALLED_APPS += THIRD_PARTY_APPS + LOCAL_APPS
