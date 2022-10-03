@@ -28,6 +28,8 @@ class OrderListSerializer(serializers.ModelSerializer):
         model = Order
         fields = [
             "id",
+            "user",
+            "product",
             "total_price",
             "quantity",
             "order_number",
