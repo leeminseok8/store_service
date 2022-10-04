@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import CreateAPIView, UpdateAPIView
 
-from orders.models import Order
-from payments.models import Payment
+from apps.orders.models import Order
+from apps.payments.models import Payment
 
 from .serializers import PaymentCreateSerializer, PaymentDeleteSerializer
 

@@ -3,8 +3,8 @@ from django.db import models
 
 from utils.timestamp import TimeStampedModel
 
-from products.models import Product
-from accounts.models import User
+from apps.products.models import Product
+from apps.accounts.models import User
 
 
 class Order(TimeStampedModel):

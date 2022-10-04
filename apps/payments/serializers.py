@@ -1,9 +1,6 @@
-# import uuid
-
 from rest_framework import serializers
-from orders.models import Order
 
-from payments.models import Payment
+from apps.payments.models import Payment
 
 
 class PaymentCreateSerializer(serializers.ModelSerializer):

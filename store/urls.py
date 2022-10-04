@@ -18,10 +18,10 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("accounts/", include("accounts.urls")),
-    path("products/", include("products.urls")),
-    path("orders/", include("orders.urls")),
-    path("payments/", include("payments.urls")),
+    path("accounts/", include("apps.accounts.urls")),
+    path("products/", include("apps.products.urls")),
+    path("orders/", include("apps.orders.urls")),
+    path("payments/", include("apps.payments.urls")),
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),

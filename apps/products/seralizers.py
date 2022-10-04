@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Product, Thumbnail
+from apps.products.models import Product, Thumbnail
 
 
 class ThumbnailSerializer(serializers.ModelSerializer):

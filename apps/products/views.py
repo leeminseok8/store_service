@@ -2,14 +2,15 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-from .models import Product
+from apps.products.models import Product
+
+from .permissions import IsOwnerOrReadOnly
 from .seralizers import (
     ProductPostSerializer,
     ProductListSerializer,
     ProductDetailSerializer,
     ProductUpdateSerializer,
 )
-from .permissions import IsOwnerOrReadOnly
 
 
 class ProductPostView(ListCreateAPIView):

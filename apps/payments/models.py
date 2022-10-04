@@ -1,7 +1,7 @@
 from re import M
 from django.db import models
 
-from orders.models import Order
+from apps.orders.models import Order
 from utils.timestamp import TimeStampedModel
 
 
