@@ -24,6 +24,10 @@ class OrderListSerializer(serializers.ModelSerializer):
     주문 리스트 조회 시리얼라이저
     """
 
+    payment_state = serializers.SlugRelatedField(
+        read_only=True, slug_field="payment_state", source="payment"
+    )
+
     class Meta:
         model = Order
         fields = [
@@ -35,6 +39,7 @@ class OrderListSerializer(serializers.ModelSerializer):
             "order_number",
             "created_at",
             "updated_at",
+            "payment_state",
         ]
 
 

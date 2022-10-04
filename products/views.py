@@ -32,13 +32,10 @@ class ProductPostView(ListCreateAPIView):
             )
 
     def get(self, request):
-        try:
-            product = Product.objects.all()
-            serializer = ProductListSerializer(product, many=True)
+        product = Product.objects.all()
+        serializer = ProductListSerializer(product, many=True)
 
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except:
-            return Response({"message": "불러올 수 없습니다."})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ProductDetailView(RetrieveUpdateDestroyAPIView):
