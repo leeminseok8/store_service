@@ -54,14 +54,11 @@ class OrderCreateView(ListCreateAPIView):
         본인 인증 후 내가 주문한 상품 리스트를 호출합니다.
         """
 
-        try:
-            user = get_object_or_404(get_user_model(), id=request.user.id)
-            order = Order.objects.filter(user_id=user.id)
-            serializer = OrderListSerializer(order, many=True)
+        user = get_object_or_404(get_user_model(), id=request.user.id)
+        order = Order.objects.filter(user_id=user.id)
+        serializer = OrderListSerializer(order, many=True)
 
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except:
-            return Response({"message": "불러올 수 없습니다."})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class OrderDetailView(RetrieveUpdateDestroyAPIView):
@@ -69,7 +66,7 @@ class OrderDetailView(RetrieveUpdateDestroyAPIView):
     주문 조회, 수정, 삭제를 위한 뷰
     """
 
-    permission_classes = IsAuthenticated
+    permission_class = IsAuthenticated
 
     def get_queryset(self):
         queryset = Order.objects.filter(pk=self.kwargs["pk"])

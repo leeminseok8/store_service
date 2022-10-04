@@ -19,7 +19,7 @@ class PaymentCreateView(CreateAPIView):
     """
 
     serializer_class = PaymentCreateSerializer
-    permission_classes = IsAuthenticated
+    permission_class = IsAuthenticated
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
